@@ -1,11 +1,12 @@
 <?php
 namespace Facebook;
-include_once('\Facebook\FacebookSession.php');
-include_once('\Facebook\FacebookRequest.php');
-include_once('\Facebook\GraphUser.php');
-include_once('\Facebook\FacebookRequestException.php');
-include_once('\Facebook\FacebookCanvasLoginHelper.php');
-include_once('\Facebook\GraphObject.php');
+
+include_once('FacebookSession.php');
+include_once('FacebookRequest.php');
+include_once('GraphUser.php');
+include_once('FacebookRequestException.php');
+include_once('FacebookCanvasLoginHelper.php');
+include_once('GraphObject.php');
 
 use Facebook\FacebookSession;
 use Facebook\FacebookRequest;
