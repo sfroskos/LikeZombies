@@ -23,7 +23,7 @@
  */
 namespace Facebook;
 
-include_once('\HttpClients\FacebookCurlHttpClient.php');
+include_once('FacebookCurlHttpClient.php');
 
 use Facebook\HttpClients\FacebookHttpable;
 use Facebook\HttpClients\FacebookCurlHttpClient;
