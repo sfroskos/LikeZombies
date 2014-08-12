@@ -22,8 +22,8 @@
  *
  */
 namespace Facebook\HttpClients;
-include_once('\HttpClients\FacebookHttpable.php');
-include_once('\HttpClients\FacebookCurl.php');
+include_once('FacebookHttpable.php');
+include_once('FacebookCurl.php');
 
 use Facebook\FacebookSDKException;
 
