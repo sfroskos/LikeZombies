@@ -1,10 +1,10 @@
 <?php
 namespace Facebook;
+include_once('FacebookRequestException.php');
 include_once('FacebookPermissionException.php');
 include_once('FacebookSession.php');
 include_once('FacebookRequest.php');
 include_once('GraphUser.php');
-include_once('FacebookRequestException.php');
 include_once('FacebookSignedRequestFromInputHelper.php');
 include_once('FacebookCanvasLoginHelper.php');
 include_once('GraphObject.php');
