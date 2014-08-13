@@ -1,5 +1,6 @@
 <?php
 namespace Facebook;
+include_once('FacebookPermissionException');
 include_once('FacebookSession.php');
 include_once('FacebookRequest.php');
 include_once('GraphUser.php');
