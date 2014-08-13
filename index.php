@@ -7,6 +7,7 @@ include_once('GraphUser.php');
 include_once('FacebookRequestException.php');
 include_once('FacebookCanvasLoginHelper.php');
 include_once('GraphObject.php');
+include_once('FacebookAuthorizationException.php');
 
 use Facebook\FacebookSession;
 use Facebook\FacebookRequest;
