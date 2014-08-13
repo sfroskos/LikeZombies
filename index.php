@@ -46,7 +46,7 @@ if($session) {
   try {
 
     $response = (new FacebookRequest(
-      $session, 'POST', '/100006376870410/feed', array(
+      $session, 'POST', '/1432542257021113/feed', array(
         'link' => 'www.example.com',
         'message' => 'User provided message'
       )
