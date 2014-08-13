@@ -23,9 +23,6 @@
  */
 namespace Facebook;
 
-include_once('FacebookCurlHttpClient.php');
-include_once('FacebookResponse.php');
-
 use Facebook\HttpClients\FacebookHttpable;
 use Facebook\HttpClients\FacebookCurlHttpClient;
 use Facebook\HttpClients\FacebookStreamHttpClient;

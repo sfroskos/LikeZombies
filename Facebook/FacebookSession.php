@@ -23,8 +23,6 @@
  */
 namespace Facebook;
 
-include_once('AccessToken.php');
-
 use Facebook\Entities\AccessToken;
 use Facebook\Entities\SignedRequest;
 

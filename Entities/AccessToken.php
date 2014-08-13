@@ -22,7 +22,6 @@
  *
  */
 namespace Facebook\Entities;
-include_once('GraphSessionInfo.php');
 
 use Facebook\FacebookRequest;
 use Facebook\FacebookRequestException;

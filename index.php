@@ -1,6 +1,5 @@
 <?php
 namespace Facebook;
-
 include_once('FacebookSession.php');
 include_once('FacebookRequest.php');
 include_once('GraphUser.php');
@@ -8,7 +7,17 @@ include_once('FacebookRequestException.php');
 include_once('FacebookCanvasLoginHelper.php');
 include_once('GraphObject.php');
 include_once('FacebookAuthorizationException.php');
-
+include_once('FacebookHttpable.php' );
+include_once('FacebookCurl.php' );
+include_once('FacebookCurlHttpClient.php' );
+include_once('FacebookResponse.php' );
+include_once('FacebookSDKException.php' );
+include_once('FacebookOtherException.php' );
+include_once('FacebookAuthorizationException.php' );
+include_once('GraphObject.php' );
+include_once('GraphSessionInfo.php' );
+include_once('FacebookSignedRequestFromInputHelper.php');
+include_once('AccessToken.php');
 use Facebook\FacebookSession;
 use Facebook\FacebookRequest;
 use Facebook\GraphUser;

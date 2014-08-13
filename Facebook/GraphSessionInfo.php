@@ -22,7 +22,6 @@
  *
  */
 namespace Facebook;
-include_once('GraphObject.php');
 /**
  * Class GraphSessionInfo
  * @package Facebook
