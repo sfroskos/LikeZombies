@@ -31,7 +31,7 @@ include_once('FacebookAuthorizationException.php' );
 include_once('GraphObject.php' );
 include_once('GraphSessionInfo.php' );
 include_once('AccessToken.php');
-include once('FacebookRedirectLoginHelper');
+include_once('FacebookRedirectLoginHelper.php');
 use Facebook\FacebookSession;
 use Facebook\FacebookRequest;
 use Facebook\GraphUser;
