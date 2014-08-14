@@ -11,7 +11,7 @@ and open the template in the editor.
     </head>
     <body>
     <?php
-namespace Facebook;
+//namespace Facebook;
 include_once('FacebookRequestException.php');
 include_once('FacebookPermissionException.php');
 include_once('FacebookSession.php');
