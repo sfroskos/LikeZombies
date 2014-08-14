@@ -31,6 +31,19 @@ use Facebook\GraphObject;
 //Get an application session
 $session = \Facebook\FacebookSession::newAppSession();
 
+//Login user
+$helper = new FacebookCanvasLoginHelper();
+try {
+  $session = $helper->getSession();
+} catch(FacebookRequestException $ex) {
+  // When Facebook returns an error
+} catch(\Exception $ex) {
+  // When validation fails or other local issues
+}
+if ($session) {
+  // Logged in
+}
+
 // Validate the session:
 try {
   $session->validate();
