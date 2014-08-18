@@ -1,4 +1,10 @@
-<?php
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+    </head>
+    <body>
+        <?php
 namespace Facebook;
 include_once('FacebookRequestException.php');
 include_once('FacebookPermissionException.php');
@@ -102,14 +108,5 @@ if($session) {
   }   
 
 }
-?>
-<!DOCTYPE html>
-<html>
-<body>
-
-<h1>My First Heading</h1>
-
-<p>My first paragraph.</p>
-
-</body>
-</html>
+        ?>
+    </body>
