@@ -1,11 +1,4 @@
-namespace Facebook;
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-    </head>
-    <body>
-        <?php
+<?php
 include_once('FacebookRequestException.php');
 include_once('FacebookPermissionException.php');
 include_once('FacebookSession.php');
@@ -109,4 +102,3 @@ if($session) {
 
 }
         ?>
-    </body>
