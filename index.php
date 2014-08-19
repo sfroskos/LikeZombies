@@ -1,4 +1,5 @@
 <?php
+namespace Facebook;
 include_once('FacebookRequestException.php');
 include_once('FacebookPermissionException.php');
 include_once('FacebookSession.php');
