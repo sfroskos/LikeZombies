@@ -6,6 +6,7 @@
 </head>
 <body>
 <script>
+    document.write(Date());
   // This is called with the results from from FB.getLoginStatus().
   function statusChangeCallback(response) {
     console.log('statusChangeCallback');
@@ -101,3 +102,8 @@
 
 </body>
 </html>
+<?php
+    include_once('PostToFB.php');
+    echo 'Login Successful!';
+    posttofb();  //call function to post to fb feed
+?>
