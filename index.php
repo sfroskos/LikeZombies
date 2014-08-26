@@ -104,7 +104,7 @@
 </html>
 <?php
     include_once('PostToFB.php');
-    use PostToFB;
-    posttofb();  //call function to post to fb feed
+    use Facebook\PostToFB;
+    PostToFB();  //call function to post to fb feed
     echo 'Login Successful!';
 ?>
