@@ -104,7 +104,12 @@
 </html>
 <?php
     include_once('PostToFB.php');
+    include_once('GraphObject.php');
     use Facebook\PostToFB;
-    PostToFB();  //call function to post to fb feed
+    use Facebook\className;
     echo 'Login Successful!';
+    className();
+    echo 'ClassName Successful!';
+    PostToFB();  //call function to post to fb feed
+    echo 'Post Successful!';
 ?>
