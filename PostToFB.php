@@ -77,6 +77,7 @@ class PostToFB
 
           }
 
-        }//if($session)
-    }//posttofb function
-} //PostToFB Class
+        }//End if($session)
+    }//End posttofb function
+} //End PostToFB Class
+?>
