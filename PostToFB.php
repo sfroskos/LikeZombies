@@ -37,7 +37,7 @@ use Facebook\GraphObject;
 class PostToFB
 {
 //This function posts a story or other item to FB on behalf of the LikeZombies game
-    public function posttofb()
+    public function PostToFB()
   //Get user name from FB Profile
     {try {
             $session = $helper->getSessionFromRedirect();

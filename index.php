@@ -1,105 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Facebook Login JavaScript Example</title>
+<meta charset="UTF-8">
+</head>
+<body>
+<script>
+    document.write(Date());
+  // This is called with the results from from FB.getLoginStatus().
+  function statusChangeCallback(response) {
+    console.log('statusChangeCallback');
+    console.log(response);
+    // The response object is returned with a status field that lets the
+    // app know the current login status of the person.
+    // Full docs on the response object can be found in the documentation
+    // for FB.getLoginStatus().
+    if (response.status === 'connected') {
+      // Logged into your app and Facebook.
+      testAPI();
+    } else if (response.status === 'not_authorized') {
+      // The person is logged into Facebook, but not your app.
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into this app.';
+    } else {
+      // The person is not logged into Facebook, so we're not sure if
+      // they are logged into this app or not.
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into Facebook.';
+    }
+  }
+
+  // This function is called when someone finishes with the Login
+  // Button.  See the onlogin handler attached to it in the sample
+  // code below.
+  function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  }
+
+  window.fbAsyncInit = function() {
+  FB.init({
+    appId      : '1432542257021113',
+    cookie     : true,  // enable cookies to allow the server to access 
+                        // the session
+    xfbml      : true,  // parse social plugins on this page
+    version    : 'v2.1' // use version 2.1
+  });
+
+  // Now that we've initialized the JavaScript SDK, we call 
+  // FB.getLoginStatus().  This function gets the state of the
+  // person visiting this page and can return one of three states to
+  // the callback you provide.  They can be:
+  //
+  // 1. Logged into your app ('connected')
+  // 2. Logged into Facebook, but not your app ('not_authorized')
+  // 3. Not logged into Facebook and can't tell if they are logged into
+  //    your app or not.
+  //
+  // These three cases are handled in the callback function.
+
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
+
+  };
+
+  // Load the SDK asynchronously
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+  //  js.src = "//connect.facebook.net/en_US/sdk.js";
+    js.src = "//connect.facebook.net/en_US/sdk/debug.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+  // Here we run a very simple test of the Graph API after login is
+  // successful.  See statusChangeCallback() for when this call is made.
+  function testAPI() {
+    console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me', function(response) {
+      console.log('Successful login for: ' + response.name);
+      document.getElementById('status').innerHTML =
+        'Thanks for logging in, ' + response.name + '!';
+    });
+  }
+</script>
+
+<!--
+  Below we include the Login Button social plugin. This button uses
+  the JavaScript SDK to present a graphical Login button that triggers
+  the FB.login() function when clicked.
+-->
+
+<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+</fb:login-button>
+
+<div id="status">
+</div>
+
+</body>
+</html>
 <?php
-namespace Facebook;
-include_once('FacebookRequestException.php');
-include_once('FacebookPermissionException.php');
-include_once('FacebookSession.php');
-include_once('FacebookRequest.php');
-include_once('GraphUser.php');
-include_once('FacebookSignedRequestFromInputHelper.php');
-include_once('FacebookCanvasLoginHelper.php');
-include_once('GraphObject.php');
-include_once('FacebookAuthorizationException.php');
-include_once('FacebookHttpable.php' );
-include_once('FacebookCurl.php' );
-include_once('FacebookCurlHttpClient.php' );
-include_once('FacebookResponse.php' );
-include_once('FacebookSDKException.php' );
-include_once('FacebookOtherException.php' );
-include_once('FacebookAuthorizationException.php' );
-include_once('GraphObject.php' );
-include_once('GraphSessionInfo.php' );
-include_once('AccessToken.php');
-include_once('FacebookRedirectLoginHelper.php');
-use Facebook\FacebookSession;
-use Facebook\FacebookRequest;
-use Facebook\GraphUser;
-use Facebook\FacebookRequestException;
-use Facebook\FacebookCanvasLoginHelper;
-use Facebook\GraphObject;
-
-//Set application variables for accessing Facebook
-\Facebook\FacebookSession::setDefaultApplication('1432542257021113','cc001cfeefbf0fa75256e0c93aaedd29');
-//Get an application session
-//$session = \Facebook\FacebookSession::newAppSession();
-
-//Login user with FacebookRedirectLoginHelper
-$scope = array('manage_pages, read_stream');
-$helper = new FacebookRedirectLoginHelper('https://likezombiesgame.com/afterlogin.php');
-$loginurl = $helper->getLoginUrl($scope);
-echo '<a href="' . $loginurl . '">Login</a>';
-    
-//Get user name from FB Profile
-try {
-    $session = $helper->getSessionFromRedirect();
-} catch(FacebookRequestException $ex) {
-    // When Facebook returns an error
-}
-if ($session) {
-    try {
-        $user_profile = (new FacebookRequest(
-            $session, 'GET', '/me'
-        ))->execute()->getGraphObject(GraphUser::className());
- 
-        echo "Name: " . $user_profile->getName();
-    } catch(FacebookRequestException $e) {
-        echo "Exception occured, code: " . $e->getCode();
-        echo " with message: " . $e->getMessage();
-    }   
-}
-
-//Login user with FacebookCanvasLoginHelper
-//$helper = new FacebookCanvasLoginHelper();
-//try {
-//  $session = $helper->getSession();
-//} catch(FacebookRequestException $ex) {
-  // When Facebook returns an error
-//} catch(\Exception $ex) {
-  // When validation fails or other local issues
-//}
-//if ($session) {
-  // Logged in
-//}
-
-// Validate the session:
-try {
-  $session->validate();
-} catch (FacebookRequestException $ex) {
-  // Session not valid, Graph API returned an exception with the reason.
-  echo $ex->getMessage();
-} catch (\Exception $ex) {
-  // Graph API returned info, but it may mismatch the current app or have expired.
-  echo $ex->getMessage();
-}
-
-if($session) {
-
-  try {
-
-    $response = (new FacebookRequest(
-      $session, 'POST', '/1432542257021113/feed', array(
-        'link' => 'www.example.com',
-        'message' => 'User provided message'
-      )
-    ))->execute()->getGraphObject();
-
-    echo "Posted with id: " . $response->getProperty('id');
-
-  } catch(FacebookRequestException $e) {
-
-    echo "Exception occured, code: " . $e->getCode();
-    echo " with message: " . $e->getMessage();
-
-  }   
-
-}
-        ?>
+    include_once('PostToFB.php');
+    use PostToFB;
+    posttofb();  //call function to post to fb feed
+    echo 'Login Successful!';
+?>
