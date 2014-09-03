@@ -37,46 +37,57 @@ use Facebook\GraphObject;
 class PostToFB
 {
 //This function posts a story or other item to FB on behalf of the LikeZombies game
-    public function PostToFB()
-  //Get user name from FB Profile
-    {try {
-            $session = $helper->getSessionFromRedirect();
+
+    public function GetFBSession()
+    {   
+        {$helper = new FacebookJavaScriptLoginHelper();
+        try {
+          $session = $helper->getSession();
         } catch(FacebookRequestException $ex) {
-            // When Facebook returns an error
+          // When Facebook returns an error
+        } catch(\Exception $ex) {
+          // When validation fails or other local issues
         }
+        return $session;
+        }     
+    }
+    
+    public function GetFBUserName($session)
+    {
         if ($session) {
             try {
                 $user_profile = (new FacebookRequest(
                     $session, 'GET', '/me'
                 ))->execute()->getGraphObject(GraphUser::className());
-
-                echo "Name: " . $user_profile->getName();
+                $name = $user_profile->getName();
+                echo "Name: " . $name;
             } catch(FacebookRequestException $e) {
                 echo "Exception occured, code: " . $e->getCode();
                 echo " with message: " . $e->getMessage();
             }   
         }
-
+        return $name;
+    }
+    public function PostToFB()
+    {
+        //Get Facebook Session using JavaScriptLoginHelper
+    $session = GetFBSession();
+        //Get user name from FB Profile
+    $fbusername = GetFBUserName($session);
+        //Post message to user feed
         if($session) {
-
           try {
-
             $response = (new FacebookRequest(
               $session, 'POST', '/1432542257021113/feed', array(
                 'link' => 'www.likezombies.com',
                 'message' => 'You have succesfully logged into LikeZombies!'
               )
             ))->execute()->getGraphObject();
-
             echo "Posted with id: " . $response->getProperty('id');
-
           } catch(FacebookRequestException $e) {
-
             echo "Exception occured, code: " . $e->getCode();
             echo " with message: " . $e->getMessage();
-
           }
-
         }//End if($session)
     }//End posttofb function
 } //End PostToFB Class
