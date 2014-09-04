@@ -68,17 +68,12 @@ class PostToFB
         }
         return $name;
     }
-    public function PostToFB()
+    public function PostToFB($currentsession)
     {
-        //Get Facebook Session using JavaScriptLoginHelper
-    $session = GetFBSession();
-        //Get user name from FB Profile
-    $fbusername = GetFBUserName($session);
-        //Post message to user feed
-        if($session) {
+        if($currentsession) {
           try {
             $response = (new FacebookRequest(
-              $session, 'POST', '/1432542257021113/feed', array(
+              $currentsession, 'POST', '/1432542257021113/feed', array(
                 'link' => 'www.likezombies.com',
                 'message' => 'You have succesfully logged into LikeZombies!'
               )

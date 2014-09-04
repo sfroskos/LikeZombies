@@ -105,8 +105,14 @@
 <?php
     include_once('PostToFB.php');
     use Facebook\PostToFB;
+    //Instantiate PostToFB class;
     $PostToFB = new PostToFB();
+    //Get Facebook Session using JavaScriptLoginHelper
+    $session = GetFBSession();
+    //Get user name from FB Profile
+    $fbusername = GetFBUserName($session);
+    //Post message to user feed
     echo 'Login Successful!';
-    $PostToFB->PostToFB();  //call function to post to fb feed
+    $PostToFB->PostToFB($session);  //call function to post to fb feed
     echo 'Post Successful!';
 ?>
