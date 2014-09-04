@@ -19,13 +19,14 @@ include_once('FacebookAuthorizationException.php' );
 include_once('GraphObject.php' );
 include_once('GraphSessionInfo.php' );
 include_once('AccessToken.php');
-include_once('FacebookRedirectLoginHelper.php');
+include_once('FacebookJavaScriptLoginHelper.php');
 use Facebook\FacebookSession;
 use Facebook\FacebookRequest;
 use Facebook\GraphUser;
 use Facebook\FacebookRequestException;
 use Facebook\FacebookCanvasLoginHelper;
 use Facebook\GraphObject;
+use Facebook\FacebookJavaScriptLoginHelper;
 
 /**
  * Class PostToFB
