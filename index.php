@@ -108,9 +108,9 @@
     //Instantiate PostToFB class;
     $PostToFB = new PostToFB();
     //Get Facebook Session using JavaScriptLoginHelper
-    $session = GetFBSession();
+    $session = $PostToFB->GetFBSession();
     //Get user name from FB Profile
-    $fbusername = GetFBUserName($session);
+    $fbusername = $PostToFB->GetFBUserName($session);
     //Post message to user feed
     echo 'Login Successful!';
     $PostToFB->PostToFB($session);  //call function to post to fb feed
