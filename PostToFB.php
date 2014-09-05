@@ -50,6 +50,7 @@ class PostToFB
         } catch(\Exception $ex) {
           // When validation fails or other local issues
         }
+        echo "Session: " . $session;
         return $session;
         }     
     }
