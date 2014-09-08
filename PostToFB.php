@@ -42,7 +42,9 @@ class PostToFB
 
     public function GetFBSession()
     {   
-        {$helper = new FacebookJavaScriptLoginHelper();
+        {
+    //    $helper = new FacebookJavaScriptLoginHelper();
+        $helper = new FacebookCanvasLoginHelper();
         try {
           $session = $helper->getSession();
         } catch(FacebookRequestException $ex) {
@@ -50,8 +52,11 @@ class PostToFB
         } catch(\Exception $ex) {
           // When validation fails or other local issues
         }
-        echo "Session: " . $session;
-        return $session;
+        if ($session) {
+          // Logged in
+            echo "Session: " . $session;
+            return $session;
+        }
         }     
     }
     
