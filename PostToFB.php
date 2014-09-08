@@ -46,7 +46,9 @@ class PostToFB
     //    $helper = new FacebookJavaScriptLoginHelper();
         $helper = new FacebookCanvasLoginHelper();
         try {
+          echo "Try";
           $session = $helper->getSession();
+          echo "Session: " . $session;
         } catch(FacebookRequestException $ex) {
           // When Facebook returns an error
         } catch(\Exception $ex) {
