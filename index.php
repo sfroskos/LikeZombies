@@ -105,10 +105,14 @@
 <?php
     include_once('PostToFB.php');
     include_once('FacebookSession.php');
+    include_once('PHPDebug.php');
     use Facebook\FacebookSession;
     use Facebook\PostToFB;
+    //Initialize Debug for Javascript console
+    $debug = new PHPDebug();
     //Set application variables for accessing Facebook
-    \Facebook\FacebookSession::setDefaultApplication('1432542257021113','cc001cfeefbf0fa75256e0c93aaedd29');
+    $FacebookSession = new FacebookSession;
+    $FacebookSession::setDefaultApplication('1432542257021113','cc001cfeefbf0fa75256e0c93aaedd29');
     //Instantiate PostToFB class;
     $PostToFB = new PostToFB();
     //Get Facebook Session using JavaScriptLoginHelper
