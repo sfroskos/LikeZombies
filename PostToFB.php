@@ -54,6 +54,7 @@ class PostToFB
         } catch(\Exception $ex) {
           // When validation fails or other local issues
         }
+        $debug->debug("Variable $session =", $session);
         if ($session) {
           // Logged in
             echo "Session: " . $session;
