@@ -21,6 +21,7 @@ include_once('GraphSessionInfo.php' );
 include_once('AccessToken.php');
 include_once('FacebookJavaScriptLoginHelper.php');
 include_once('SignedRequest.php');
+include_once('PHPDebug.php');
 use Facebook\FacebookSession;
 use Facebook\FacebookRequest;
 use Facebook\GraphUser;
