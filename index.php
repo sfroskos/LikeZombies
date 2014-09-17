@@ -13,9 +13,9 @@
     //Instantiate PostToFB class;
     $PostToFB = new PostToFB();
     //Get Facebook Session using JavaScriptLoginHelper
-    $debug->debug("Variable $session =", $session);
+    $debug->debug("Variable session =", $session);
     $session = $PostToFB->GetFBSession();
-    $debug->debug("Variable $session =", $session);
+    $debug->debug("Variable session =", $session);
     //Get user name from FB Profile
     $fbusername = $PostToFB->GetFBUserName($session);
     //Post message to user feed

@@ -57,7 +57,7 @@ class PostToFB
         }
             //Initialize Debug for Javascript console
         $debug = new PHPDebug();
-        $debug->debug("Variable $session =", $session);
+        $debug->debug("Variable session =", $session);
         if ($session) {
           // Logged in
             echo "Session: " . $session;
