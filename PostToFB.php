@@ -54,6 +54,8 @@ class PostToFB
         } catch(\Exception $ex) {
           // When validation fails or other local issues
         }
+            //Initialize Debug for Javascript console
+        $debug = new PHPDebug();
         $debug->debug("Variable $session =", $session);
         if ($session) {
           // Logged in
