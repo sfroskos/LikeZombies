@@ -4,6 +4,7 @@
     include_once('PHPDebug.php');
     use Facebook\FacebookSession;
     use Facebook\PostToFB;
+    use Facebook\PHPDebug;
     //Initialize Debug for Javascript console
     $debug = new PHPDebug();
     //Set application variables for accessing Facebook
