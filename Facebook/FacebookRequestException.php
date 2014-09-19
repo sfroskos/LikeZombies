@@ -22,7 +22,7 @@
  *
  */
 namespace Facebook;
-include ('FacebookSDKException.php');
+//include ('FacebookSDKException.php');
 /**
  * Class FacebookRequestException
  * @package Facebook
