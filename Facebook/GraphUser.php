@@ -22,7 +22,7 @@
  *
  */
 namespace Facebook;
-require_once('GraphObject.php');
+//require_once('GraphObject.php');
 
 /**
  * Class GraphUser
