@@ -44,8 +44,8 @@ class PostToFB
     public function GetFBSession()
     {   
         {
-    //    $helper = new FacebookJavaScriptLoginHelper();
-        $helper = new FacebookCanvasLoginHelper();
+        $helper = new FacebookJavaScriptLoginHelper();
+    //    $helper = new FacebookCanvasLoginHelper();
         try {
           echo "Try";
           $session = $helper->getSession();
