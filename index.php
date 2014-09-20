@@ -8,6 +8,7 @@ require_once( 'Facebook/FacebookRequestException.php' );
 require_once( 'Facebook/FacebookAuthorizationException.php' );
 require_once( 'Facebook/GraphObject.php' );
 require_once( 'Facebook/GraphUser.php' );
+require_once( 'SignedRequest.php' );
 require_once( 'Facebook/FacebookSignedRequestFromInputHelper.php' );
 require_once( 'Facebook/FacebookCanvasLoginHelper.php' );
 
