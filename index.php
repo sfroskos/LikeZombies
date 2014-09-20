@@ -12,6 +12,9 @@ require_once( 'SignedRequest.php' );
 require_once( 'AccessToken.php' );
 require_once( 'Facebook/FacebookSignedRequestFromInputHelper.php' );
 require_once( 'Facebook/FacebookCanvasLoginHelper.php' );
+require_once( 'PostToFB.php');
+include_once( 'Facebook/FacebookSession.php');
+include_once( 'PHPDebug.php');
 
 use Facebook\FacebookSession;
 use Facebook\FacebookRedirectLoginHelper;
@@ -24,7 +27,11 @@ use Facebook\GraphObject;
 use Facebook\GraphUser;
 use Facebook\FacebookSignedRequestFromInputHelper;
 use Facebook\FacebookCanvasLoginHelper;
+use Facebook\PostToFB;
+use Facebook\PHPDebug;
 
+//Initialize Debug for Javascript console
+$debug = new PHPDebug();
 if (!isset($_SESSION['facebookUserId']) || !isset($_SESSION['facebookSession']) || !isset($_SESSION['facebookUserProfile'])) {
     // init app with app id (APPID) and secret (SECRET)
 //    $FacebookSession = new FacebookSession($_SESSION['facebookSession']);
@@ -40,3 +47,16 @@ if (!isset($_SESSION['facebookUserId']) || !isset($_SESSION['facebookSession']) 
          // When validation fails or other local issues
     }
 }    
+    //Instantiate PostToFB class;
+    $PostToFB = new PostToFB();
+    //Get Facebook Session using JavaScriptLoginHelper
+    $debug->debug("Variable session =", $session);
+    $session = $PostToFB->GetFBSession();
+    $debug->debug("Variable session =", $session);
+    //Get user name from FB Profile
+    $fbusername = $PostToFB->GetFBUserName($session);
+    //Post message to user feed
+    echo 'Login Successful!';
+    $PostToFB->PostToFB($session);  //call function to post to fb feed
+    echo 'Post Successful!';
+?>
