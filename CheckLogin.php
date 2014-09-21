@@ -8,8 +8,8 @@ $db_name="LikeZombies"; // Database name
 $tbl_name="users"; // Table name 
 
 // Connect to server and select databse.
-mysql_connect("$host", "$username", "$password")or die("cannot connect"); 
-mysql_select_db("$db_name")or die("cannot select DB");
+mysqli::real_connect("$host", "$username", "$password")or die("cannot connect"); 
+mysqli::select_db("$db_name")or die("cannot select DB");
 
 // Define $myusername and $mypassword 
 $myusername=$_POST['myusername']; 
