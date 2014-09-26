@@ -1,37 +1,40 @@
 <?php
 
-ob_start();
-$host="localhost"; // Host name 
-$username="root"; // Mysql username 
-$password="kir6l6fU"; // Mysql password 
-$db_name="LikeZombies"; // Database name 
-$tbl_name="users"; // Table name 
+db_start();
+$dbhost="localhost"; // Host name 
+$dbusername="root"; // Mysql username 
+$dbpassword="kir6l6fU"; // Mysql password 
+$dbname="LikeZombies"; // Database name 
+$tblname="users"; // Table name 
 
-// Connect to server and select databse.
-mysqli::real_connect("$host", "$username", "$password")or die("cannot connect"); 
-mysqli::select_db("$db_name")or die("cannot select DB");
+// Connect to database
+$dbconnection = mysqli_connect("$dbhost","$dbusername","$dbpassword","$dbname);
+// Check DB connection
+if (mysqli_connect_errno()) {
+  echo 'Failed to connect to MySQL: ' . mysqli_connect_error();
+}
 
-// Define $myusername and $mypassword 
-$myusername=$_POST['myusername']; 
-$mypassword=$_POST['mypassword']; 
+// Define $gameusername and $gamepassword 
+$gameusername=$_POST['gameusername']; 
+$gamepassword=$_POST['gamepassword']; 
 
 // To protect MySQL injection (more detail about MySQL injection)
-$myusername = stripslashes($myusername);
-$mypassword = stripslashes($mypassword);
-$myusername = mysql_real_escape_string($myusername);
-$mypassword = mysql_real_escape_string($mypassword);
-$sql="SELECT * FROM $tbl_name WHERE username='$myusername' and password=UNHEX(SHA1('$mypassword'))";
-$result=mysql_query($sql);
+$gameusername = stripslashes($gameusername);
+$gamepassword = stripslashes($gamepassword);
+$gameusername = mysql_real_escape_string($gameusername);
+$gamepassword = mysql_real_escape_string($gamepassword);
+$sql="SELECT * FROM $tblname WHERE username='$gameusername' and password=UNHEX(SHA1('$gamepassword'))";
+$sqlresult=mysql_query($sql);
 
 // Mysql_num_row is counting table row
 $count=mysql_num_rows($result);
 
-// If result matched $myusername and $mypassword, table row must be 1 row
+// If result matched $gameusername and $gamepassword, table row must be 1 row
 if($count==1){
 
 // Register $myusername, $mypassword and redirect to file "login_success.php"
-session_register("myusername");
-session_register("mypassword"); 
+session_register("gameusername");
+session_register("gamepassword"); 
 header("location:login_success.php");
 }
 else {

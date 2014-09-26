@@ -4,42 +4,65 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
+<?php session_start(); ?>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-    </head>
-    <body>
-   <table width="300" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC">
-    <tr>
-    <form name="form1" method="post" action="checklogin.php">
-    <td>
-    <table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF">
-    <tr>
-    <td colspan="3"><strong>Member Login </strong></td>
-    </tr>
-    <tr>
-    <td width="78">Username</td>
-    <td width="6">:</td>
-    <td width="294"><input name="myusername" type="text" id="myusername"></td>
-    </tr>
-    <tr>
-    <td>Password</td>
-    <td>:</td>
-    <td><input name="mypassword" type="text" id="mypassword"></td>
-    </tr>
-    <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td><input type="submit" name="Submit" value="Login"></td>
-    </tr>
-    </table>
-    </td>
-    </form>
-    </tr>
-    </table>     
-        <?php
-        // put your code here
-        ?>
-    </body>
-</html>
+<body>
+
+<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+//<form action="CheckLogin.php" method="post">
+UserName: <input type="text" name="gameusername"><br>
+Password: <input type="text" name="gamepassword"><br>
+<input type="submit">
+</form>
+<?php
+ob_start();
+// Initialize variables
+$dbhost='localhost'; // Host name 
+$dbusername="root"; // Mysql username 
+$dbpassword=""; // Mysql password 
+$dbname="likezombies"; // Database name 
+$tblname="users"; // Table name 
+$gameusername = $gamepassword = "";
+
+// Check if input has been received before processing
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+// Check input for malicious code
+    $gameusername = testinput($_POST["gameusername"]);
+    $gamepassword = testinput($_POST["gamepassword"]);
+    // Connect to database
+    $dbconnection = mysqli_connect($dbhost,$dbusername,$dbpassword,$dbname);
+    // Check DB connection
+    if (mysqli_connect_errno()) {
+        echo 'Failed to connect to MySQL: ' . mysqli_connect_error();
+    }
+    $sql='SELECT * FROM ' + $tblname + ' WHERE username= ' + $gameusername + ' and password=UNHEX(SHA1('+ $gamepassword + '))';
+    $sqlresult=mysqli_query($dbconnection,$sql);
+
+    // Mysql_num_row is counting table row
+    $rowcount=mysqli_num_rows($sqlresult);
+
+    // If result matched $gameusername and $gamepassword, table row must be 1 row
+    if($rowcount==1){
+        // Register $myusername, $mypassword and redirect to file "login_success.php"
+        $_SESSION['gameusername']=1;    
+        $_SESSION['gameusername']=1;    
+        header("location:login_success.php");
+    //Close connection to DB as it is no longer needed
+    mysqli_close($dbconnection);
+    }
+    else {
+        echo "Wrong Username or Password";
+    }
+}
+
+function testinput($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+
+ob_end_flush();
+?>
+</body>
+</html>  
