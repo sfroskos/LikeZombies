@@ -9,7 +9,6 @@ and open the template in the editor.
 <body>
 
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-//<form action="CheckLogin.php" method="post">
 UserName: <input type="text" name="gameusername"><br>
 Password: <input type="text" name="gamepassword"><br>
 <input type="submit">
@@ -35,8 +34,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (mysqli_connect_errno()) {
         echo 'Failed to connect to MySQL: ' . mysqli_connect_error();
     }
-    $sql='SELECT * FROM ' + $tblname + ' WHERE username= ' + $gameusername + ' and password=UNHEX(SHA1('+ $gamepassword + '))';
-    $sqlresult=mysqli_query($dbconnection,$sql);
+    //$sql='SELECT * FROM ' + $tblname + ' WHERE username= ' + $gameusername + ' and password = UNHEX(SHA1('+ $gamepassword + '))';
+    $sql="SELECT * FROM users WHERE username = 'john' AND password = UNHEX(SHA1('1234'))";
+    $sqlresult=mysqli_query($dbconnection,"SELECT * FROM users WHERE username = 'john' AND password = UNHEX(SHA1('1234'))");
 
     // Mysql_num_row is counting table row
     $rowcount=mysqli_num_rows($sqlresult);
