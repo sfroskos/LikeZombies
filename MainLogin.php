@@ -13,6 +13,8 @@ UserName: <input type="text" name="gameusername"><br>
 Password: <input type="text" name="gamepassword"><br>
 <input type="submit">
 </form>
+</body>
+</html>  
 <?php
 ob_start();
 // Initialize variables
@@ -34,9 +36,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (mysqli_connect_errno()) {
         echo 'Failed to connect to MySQL: ' . mysqli_connect_error();
     }
-    //$sql='SELECT * FROM ' + $tblname + ' WHERE username= ' + $gameusername + ' and password = UNHEX(SHA1('+ $gamepassword + '))';
-    $sql="SELECT * FROM users WHERE username = 'john' AND password = UNHEX(SHA1('1234'))";
-    $sqlresult=mysqli_query($dbconnection,"SELECT * FROM users WHERE username = 'john' AND password = UNHEX(SHA1('1234'))");
+    $sql="SELECT * FROM $tblname WHERE username = '$gameusername' AND password = SHA1('$gamepassword')";
+    $sqlresult=mysqli_query($dbconnection,$sql);
 
     // Mysql_num_row is counting table row
     $rowcount=mysqli_num_rows($sqlresult);
@@ -44,8 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // If result matched $gameusername and $gamepassword, table row must be 1 row
     if($rowcount==1){
         // Register $myusername, $mypassword and redirect to file "login_success.php"
-        $_SESSION['gameusername']=1;    
-        $_SESSION['gameusername']=1;    
+        $_SESSION['gameusername']=$gameusername;    
         header("location:login_success.php");
     //Close connection to DB as it is no longer needed
     mysqli_close($dbconnection);
@@ -64,5 +64,4 @@ function testinput($data) {
 
 ob_end_flush();
 ?>
-</body>
-</html>  
+
