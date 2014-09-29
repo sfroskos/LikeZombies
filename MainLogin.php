@@ -4,7 +4,6 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<?php session_start(); ?>
 <html>
 <body>
 
@@ -12,11 +11,13 @@ and open the template in the editor.
 UserName: <input type="text" name="gameusername"><br>
 Password: <input type="text" name="gamepassword"><br>
 <input type="submit">
+<a href="signup.html">Register</a>
 </form>
 </body>
 </html>  
 <?php
 ob_start();
+include_once('LoginSuccess.php');
 // Initialize variables
 $dbhost='localhost'; // Host name 
 $dbusername="root"; // Mysql username 
