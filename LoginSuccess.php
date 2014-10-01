@@ -1,9 +1,4 @@
 <?php
 session_start();
+echo 'Login Successful!';
 ?>
-
-<html>
-<body>
-Login Successful!
-</body>
-</html>

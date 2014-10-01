@@ -11,13 +11,14 @@ and open the template in the editor.
 UserName: <input type="text" name="gameusername"><br>
 Password: <input type="text" name="gamepassword"><br>
 <input type="submit">
-<a href="signup.html">Register</a>
+<a href="register.php">Register</a>
 </form>
 </body>
 </html>  
 <?php
 ob_start();
 include_once('LoginSuccess.php');
+include_once('TestInput.php');
 // Initialize variables
 $dbhost='localhost'; // Host name 
 $dbusername="root"; // Mysql username 
@@ -56,12 +57,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-function testinput($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
-}
 
 ob_end_flush();
 ?>

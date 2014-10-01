@@ -6,34 +6,40 @@
     <body id="body-color"> 
         <div id="Sign-Up"> 
             <fieldset style="width:30%">
-                <legend>Registration Form</legend> 
+                <legend>Registration for LikeZombies!</legend> 
                 <table border="0"> 
                     <tr> 
-                    <form method="POST" action="connectivity-sign-up.php"> 
-                        <td>Name</td>
+                    <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> 
+                        <td>User ID</td>
                         <td> 
                             <input type="text" name="gameusername"></td> 
                     </tr> 
                     <tr> 
-                        <td>Email</td>
+                        <td>Password</td>
                         <td> 
-                            <input type="text" name="gamepassword">
+                            <input type="text" name="gamepassword1">
                         </td> 
                     </tr> 
                     <tr> 
-                        <td>
-                            <input id="button" type="submit" name="submit" value="Sign-Up">
+                        <td>Confirm Password</td>
+                        <td> 
+                            <input type="text" name="gamepassword2">
+                        </td> 
+                    </tr> 
+                    <tr> 
+                            <input id="button" type="submit" name="submit" value="Register">
                         </td> 
                     </tr> 
                     </form> 
                 </table> 
+                <a href="MainLogin.php">Login</a>
             </fieldset> 
         </div> 
     </body> 
 </html>
 <?php
 ob_start();
-include_once('MainLogin.php');
+include_once('TestInput.php');
 // Initialize variables
 $dbhost='localhost'; // Host name 
 $dbusername="root"; // Mysql username 
@@ -46,8 +52,12 @@ $gameusername = $gamepassword = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 // Check input for malicious code
     $gameusername = testinput($_POST["gameusername"]);
-    $gamepassword = testinput($_POST["gamepassword"]);
+    $gamepassword1 = testinput($_POST["gamepassword1"]);
+    $gamepassword2 = testinput($_POST["gamepassword2"]);
     // Connect to database
+    if ($gamepassword1 != $gamepassword2) {
+        echo 'Passwords do not match. Please try again.' . mysqli_connect_error();
+    }
     $dbconnection = mysqli_connect($dbhost,$dbusername,$dbpassword,$dbname);
     // Check DB connection
     if (mysqli_connect_errno()) {
@@ -68,18 +78,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     else {
         $sql="INSERT INTO $tblname (username,password) VALUES('$gameusername',SHA1('$gamepassword')";
         $sqlresult=mysqli_query($dbconnection,$sql);
-        if($sqlresult=200){
+        if($sqlresult==200){
             echo 'User successfully registered! <a href="MainLogin.php">Login</a>';
         }
     }
     mysqli_close($dbconnection);
     }
-
-function testinput($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
-}
 ob_end_flush();
 ?>
