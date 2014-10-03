@@ -1,12 +1,12 @@
 <html> 
 <link rel="stylesheet" type="text/css" href="style.css">
     <head> 
-        <title>Sign-Up</title> 
+        <title>Register</title> 
     </head> 
     <body id="body-color"> 
         <div id="Sign-Up"> 
             <fieldset style="width:30%">
-                <legend>Registration for LikeZombies!</legend> 
+                <legend>Registration for LikeZombies</legend> 
                 <table border="0"> 
                     <tr> 
                     <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> 
@@ -46,7 +46,7 @@ $dbusername="root"; // Mysql username
 $dbpassword=""; // Mysql password 
 $dbname="likezombies"; // Database name 
 $tblname="users"; // Table name 
-$gameusername = $gamepassword = "";
+$gameusername = $gamepassword1 = $gamepassword2 = "";
 
 // Check if input has been received before processing
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -58,31 +58,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($gamepassword1 != $gamepassword2) {
         echo 'Passwords do not match. Please try again.' . mysqli_connect_error();
     }
-    $dbconnection = mysqli_connect($dbhost,$dbusername,$dbpassword,$dbname);
-    // Check DB connection
-    if (mysqli_connect_errno()) {
-        echo 'Failed to connect to MySQL: ' . mysqli_connect_error();
-    }
-    $sql="SELECT * FROM $tblname WHERE username = '$gameusername'";
-    $sqlresult=mysqli_query($dbconnection,$sql);
-
-    // Mysql_num_row is counting table row
-    $rowcount=mysqli_num_rows($sqlresult);
-
-    // If result matched $gameusername and $gamepassword, table row must be 1 row
-    if($rowcount==1){
-        // Username is already taken
-        echo "This username is already registered. Please select a different username.";
-        header("location:signup.php");
-    }
     else {
-        $sql="INSERT INTO $tblname (username,password) VALUES('$gameusername',SHA1('$gamepassword')";
-        $sqlresult=mysqli_query($dbconnection,$sql);
-        if($sqlresult==200){
-            echo 'User successfully registered! <a href="MainLogin.php">Login</a>';
+        $mysqli = new mysqli($dbhost,$dbusername,$dbpassword,$dbname);
+        //Output any connection error
+        if ($mysqli->connect_error) {
+            die('Error : ('. $mysqli->connect_errno .') '. $mysqli->connect_error);
         }
+        $sql="SELECT * FROM $tblname WHERE username = '$gameusername'";
+        $sqlresult=$mysqli->query($sql);
+
+        // If result matched $gameusername and $gamepassword, table row must be 1 row
+        if($sqlresult->num_rows == 1){
+            // Username is already taken
+            echo "This username is already registered. Please select a different username.";
+            header("location:Register.php");
+        }
+        else {
+            $gameusername = '"'.$mysqli->real_escape_string($gameusername).'"';
+            $gamepassword1 = '"'.$mysqli->real_escape_string($gamepassword1).'"';
+            $sql="INSERT INTO $tblname(username,password) VALUES($gameusername,SHA2($gamepassword1,256))";
+            // $insertrow = $mysqli->query($sql);
+            $insertrow = $mysqli->query($sql) or trigger_error($mysqli->error." [$sql]");
+
+            if($insertrow){
+                echo 'You have been registered successfully!'; 
+            }
+            else{
+                die('Error : ('. $mysqli->errno .') '. $mysqli->error);
+            }
+        }
+    $mysqli->close();
     }
-    mysqli_close($dbconnection);
+}
+    // Store_array inserts data into a table from an array
+   function store_array (&$data, $table, $mysqli)
+  {
+    $cols = implode(',', array_keys($data));
+    foreach (array_values($data) as $value)
+    {
+      isset($vals) ? $vals .= ',' : $vals = '';
+      $vals .= '\''.$this->mysql->real_escape_string($value).'\'';
     }
+    $mysqli->real_query('INSERT INTO '.$table.' ('.$cols.') VALUES ('.$vals.')');
+  }
 ob_end_flush();
 ?>

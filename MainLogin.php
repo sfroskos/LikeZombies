@@ -1,23 +1,39 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-<body>
-
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-UserName: <input type="text" name="gameusername"><br>
-Password: <input type="text" name="gamepassword"><br>
-<input type="submit">
-<a href="register.php">Register</a>
-</form>
-</body>
-</html>  
+<html> 
+<link rel="stylesheet" type="text/css" href="style.css">
+    <head> 
+        <title>Login</title> 
+    </head> 
+    <body id="body-color"> 
+        <div id="Sign-Up"> 
+            <fieldset style="width:30%">
+                <legend>LikeZombies Login</legend> 
+                <table border="0"> 
+                    <tr> 
+                    <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> 
+                        <td>User ID</td>
+                        <td> 
+                            <input type="text" name="gameusername">
+                        </td> 
+                    </tr> 
+                    <tr> 
+                        <td>Password</td>
+                        <td> 
+                            <input type="text" name="gamepassword">
+                        </td> 
+                    </tr> 
+                    <tr> 
+                            <input id="button" type="submit" name="submit" value="Login">
+                        </td> 
+                    </tr> 
+                    </form> 
+                </table> 
+                <a href="Register.php">Register</a> <a href="Logout.php">Logout</a>
+            </fieldset> 
+        </div> 
+    </body> 
+</html>
 <?php
 ob_start();
-include_once('LoginSuccess.php');
 include_once('TestInput.php');
 // Initialize variables
 $dbhost='localhost'; // Host name 
@@ -33,31 +49,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $gameusername = testinput($_POST["gameusername"]);
     $gamepassword = testinput($_POST["gamepassword"]);
     // Connect to database
-    $dbconnection = mysqli_connect($dbhost,$dbusername,$dbpassword,$dbname);
-    // Check DB connection
-    if (mysqli_connect_errno()) {
-        echo 'Failed to connect to MySQL: ' . mysqli_connect_error();
+    $mysqli = mysqli_connect($dbhost,$dbusername,$dbpassword,$dbname);
+    //Output any connection error
+    if ($mysqli->connect_error) {
+        die('Error : ('. $mysqli->connect_errno .') '. $mysqli->connect_error);
     }
-    $sql="SELECT * FROM $tblname WHERE username = '$gameusername' AND password = SHA1('$gamepassword')";
-    $sqlresult=mysqli_query($dbconnection,$sql);
-
-    // Mysql_num_row is counting table row
-    $rowcount=mysqli_num_rows($sqlresult);
-
+    $sql="SELECT * FROM $tblname WHERE username = '$gameusername' AND password = SHA2('$gamepassword',256)";
+    $sqlresult=$mysqli->query($sql);
     // If result matched $gameusername and $gamepassword, table row must be 1 row
-    if($rowcount==1){
-        // Register $myusername, $mypassword and redirect to file "login_success.php"
+    if($sqlresult->num_rows == 1){
+        // Register $myusername, $mypassword and print login success message
         $_SESSION['gameusername']=$gameusername;    
-        header("location:login_success.php");
+        session_start();
+        echo 'Login Successful!';
     //Close connection to DB as it is no longer needed
-    mysqli_close($dbconnection);
+    $mysqli->close();
     }
     else {
         echo "Wrong Username or Password";
     }
 }
-
-
 ob_end_flush();
 ?>
-
