@@ -4,7 +4,7 @@
         <title>Register</title> 
     </head> 
     <body id="body-color"> 
-        <div id="Sign-Up"> 
+        <div id="LikeZombiesGame"> 
             <fieldset style="width:30%">
                 <legend>Registration for LikeZombies</legend> 
                 <table border="0"> 

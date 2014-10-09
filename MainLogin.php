@@ -4,7 +4,7 @@
         <title>Login</title> 
     </head> 
     <body id="body-color"> 
-        <div id="Sign-Up"> 
+        <div id="LikeZombiesGame"> 
             <fieldset style="width:30%">
                 <legend>LikeZombies Login</legend> 
                 <table border="0"> 
@@ -62,6 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['gameusername']=$gameusername;    
         session_start();
         echo 'Login Successful!';
+        header("location:loginsuccess.php");
     //Close connection to DB as it is no longer needed
     $mysqli->close();
     }
