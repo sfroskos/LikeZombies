@@ -46,7 +46,7 @@ if (!isset($_SESSION['facebookUserId']) || !isset($_SESSION['facebookSession']) 
     } catch( Exception $ex ) {
          // When validation fails or other local issues
     }
-    if ($FBsession) {
+    if ($FBSession) {
     // Logged in    
         echo "Facebook Login to LikeZombies Successful!";
     }
