@@ -32,7 +32,7 @@ use Facebook\PHPDebug;
 
 //Initialize Debug for Javascript console
 $debug = new PHPDebug();
-if (!isset($_SESSION['facebookUserId']) || !isset($_SESSION['facebookSession']) || !isset($_SESSION['facebookUserProfile'])) {
+// if (!isset($_SESSION['facebookUserId']) || !isset($_SESSION['facebookSession']) || !isset($_SESSION['facebookUserProfile'])) {
     // init app with app id (APPID) and secret (SECRET)
 //    $FacebookSession = new FacebookSession($_SESSION['facebookSession']);
     FacebookSession::setDefaultApplication('1432542257021113','cc001cfeefbf0fa75256e0c93aaedd29');
@@ -54,7 +54,7 @@ if (!isset($_SESSION['facebookUserId']) || !isset($_SESSION['facebookSession']) 
     // Login failed
         echo "Facebook Login to LikeZombies Failed!";
         }
-}    
+// }    
     //Instantiate PostToFB class;
     $PostToFB = new PostToFB();
     //Get Facebook Session using JavaScriptLoginHelper
