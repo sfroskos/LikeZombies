@@ -46,6 +46,14 @@ if (!isset($_SESSION['facebookUserId']) || !isset($_SESSION['facebookSession']) 
     } catch( Exception $ex ) {
          // When validation fails or other local issues
     }
+    if ($session) {
+    // Logged in    
+        echo "Facebook Login to LikeZombies Successful!";
+    }
+    else {
+    // Login failed
+        echo "Facebook Login to LikeZombies Failed!";
+        }
 }    
     //Instantiate PostToFB class;
     $PostToFB = new PostToFB();
