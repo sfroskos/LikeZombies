@@ -39,10 +39,10 @@ $debug = new PHPDebug();
     // login helper
     //$helper = new FacebookRedirectLoginHelper( 'https://apps.facebook.com/likezombies.dev' );
     $helper = new FacebookCanvasLoginHelper();
-    $debug->debug("Trying $helper.getSession", null, INFO);
+    $debug->debug("Trying getSession", null, INFO);
    try {
          $FBSession = $helper->getSession();
-         $debug->debug("Trying $helper.getSession", null, INFO);
+         $debug->debug("Trying getSession", null, INFO);
     } catch( FacebookRequestException $ex ) {
         $debug->debug("$ex = ", $ex);
         // When Facebook returns an error
