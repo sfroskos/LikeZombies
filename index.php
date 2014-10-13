@@ -57,7 +57,7 @@ $debug = new PHPDebug();
 //    }
 //    else {
     // Login failed. Redirect user to log in to LikeZombies
-        $helper = new FacebookRedirectLoginHelper('https://likezombiesgame/LoginSuccess.php');
+        $helper = new FacebookRedirectLoginHelper('https://likezombiesgame.com/LoginSuccess.php');
         $FBloginUrl = $helper->getLoginUrl();
         $debug->debug("FBloginUrl = ", $FBloginUrl);
     // Use the login url to redirect to Facebook for authentication
