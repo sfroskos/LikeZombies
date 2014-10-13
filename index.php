@@ -52,24 +52,16 @@ $debug = new PHPDebug();
     }
     $debug->debug("Variable FBSession =", $FBSession);
     if ($FBSession) {
-    // Logged in    
-        echo "Facebook Login to LikeZombies Successful!";
+    // Already logged into LikeZombies
+        echo "You are already logged into LikeZombies!";
     }
     else {
-    // Login failed
-        echo "Facebook Login to LikeZombies Failed!";
+    // Login failed. Redirect user to log in to LikeZombies
+        $helper = new FacebookRedirectLoginHelper('https://likezombiesgame/LoginSuccess.php');
+        $FBloginUrl = $helper->getLoginUrl();
+    // Use the login url to redirect to Facebook for authentication
+        header(FBloginUrl);
+    //         echo "Facebook Login to LikeZombies Failed!";
         }
 // }    
-    //Instantiate PostToFB class;
-    $PostToFB = new PostToFB();
-    //Get Facebook Session using JavaScriptLoginHelper
-    $debug->debug("Variable FBSession =", $FBSession);
-    $FBSession = $PostToFB->GetFBSession();
-    $debug->debug("Variable FBSession =", $FBSession);
-    //Get user name from FB Profile
-    $fbusername = $PostToFB->GetFBUserName($FBSession);
-    //Post message to user feed
-    echo 'Login Successful!';
-    $PostToFB->PostToFB($FBSession);  //call function to post to fb feed
-    echo 'Post Successful!';
 ?>
