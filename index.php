@@ -57,7 +57,9 @@ $debug = new PHPDebug();
 //    }
 //    else {
     // Login failed. Redirect user to log in to LikeZombies
-        $helper = new FacebookRedirectLoginHelper('https://likezombiesgame.com/LoginSuccess.php');
+        $helper = new FacebookRedirectLoginHelper(
+            'https://likezombiesgame.com/LoginSuccess.php',
+            $appId = '1432542257021113', $appSecret = 'cc001cfeefbf0fa75256e0c93aaedd29');
         $getLoginUrlparams = array(
             'scope' => 'public_profile, user_friends, user_relationships, read_stream, publish_actions',
             'redirect_uri' => 'https://likezombiesgame.com/LoginSuccess.php'
