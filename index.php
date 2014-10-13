@@ -62,7 +62,8 @@ $debug = new PHPDebug();
             'scope' => 'public_profile, user_friends, user_relationships, read_stream, publish_actions',
             'redirect_uri' => 'https://likezombiesgame.com/LoginSuccess.php'
         );
-        $FBloginUrl = $helper->getLoginUrl($getLoginUrlparams);
+        //$FBloginUrl = $helper->getLoginUrl($getLoginUrlparams);
+        echo '<a href="' . $helper->getLoginUrl() . '">Login with Facebook</a>';
         $debug->debug("FBloginUrl = ", $FBloginUrl);
     // Use the login url to redirect to Facebook for authentication
         header(FBloginUrl);
