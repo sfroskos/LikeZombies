@@ -1,15 +1,12 @@
 <?php
 namespace Facebook;
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- * Description of PHPDebug
+ * PHPDebug is a customer class created to enable debugging of PHP code using 
+ * the JavaScript console. This way JavaScript and PHP can be run together and
+ * debugged. This is particularly useful when debugging code to be executed on
+ * Facebook Canvas
  *
- * @author amandamountain
+ * @author Seth Roskos
  */
 class PHPDebug {
      
