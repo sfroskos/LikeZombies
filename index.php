@@ -58,13 +58,13 @@ $debug = new PHPDebug();
     //Instantiate PostToFB class;
     $PostToFB = new PostToFB();
     //Get Facebook Session using JavaScriptLoginHelper
-    $debug->debug("Variable session =", $session);
-    $session = $PostToFB->GetFBSession();
-    $debug->debug("Variable session =", $session);
+    $debug->debug("Variable FBSession =", $FBSession);
+    $FBSession = $PostToFB->GetFBSession();
+    $debug->debug("Variable FBSession =", $FBSession);
     //Get user name from FB Profile
-    $fbusername = $PostToFB->GetFBUserName($session);
+    $fbusername = $PostToFB->GetFBUserName($FBSession);
     //Post message to user feed
     echo 'Login Successful!';
-    $PostToFB->PostToFB($session);  //call function to post to fb feed
+    $PostToFB->PostToFB($FBSession);  //call function to post to fb feed
     echo 'Post Successful!';
 ?>
