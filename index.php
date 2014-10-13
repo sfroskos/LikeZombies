@@ -42,8 +42,10 @@ $debug = new PHPDebug();
    try {
          $FBSession = $helper->getSession();
     } catch( FacebookRequestException $ex ) {
+        $debug->debug("$ex = ", $ex);
         // When Facebook returns an error
     } catch( Exception $ex ) {
+        $debug->debug("$ex = ", $ex);
          // When validation fails or other local issues
     }
     if ($FBSession) {
