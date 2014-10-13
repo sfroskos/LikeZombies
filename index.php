@@ -38,30 +38,31 @@ $debug = new PHPDebug();
     FacebookSession::setDefaultApplication('1432542257021113','cc001cfeefbf0fa75256e0c93aaedd29');
     // login helper
     //$helper = new FacebookRedirectLoginHelper( 'https://apps.facebook.com/likezombies.dev' );
-    $helper = new FacebookCanvasLoginHelper();
-    $debug->debug("Trying helper->getSession", null, INFO);
-   try {
-         $FBSession = $helper->getSession();
-         $debug->debug("Trying helper->getSession", null, INFO);
-    } catch( FacebookRequestException $ex ) {
-        $debug->debug("ex = ", $ex);
+//    $helper = new FacebookCanvasLoginHelper();
+//    $debug->debug("Trying helper->getSession", null, INFO);
+//   try {
+//         $FBSession = $helper->getSession();
+//         $debug->debug("Trying helper->getSession", null, INFO);
+//    } catch( FacebookRequestException $ex ) {
+//        $debug->debug("ex = ", $ex);
         // When Facebook returns an error
-    } catch( Exception $ex ) {
-        $debug->debug("ex = ", $ex);
+//    } catch( Exception $ex ) {
+//        $debug->debug("ex = ", $ex);
          // When validation fails or other local issues
-    }
-    $debug->debug("Variable FBSession =", $FBSession);
-    if ($FBSession) {
+//    }
+//    $debug->debug("Variable FBSession =", $FBSession);
+//    if ($FBSession) {
     // Already logged into LikeZombies
-        echo "You are already logged into LikeZombies!";
-    }
-    else {
+//        echo "You are already logged into LikeZombies!";
+//    }
+//    else {
     // Login failed. Redirect user to log in to LikeZombies
         $helper = new FacebookRedirectLoginHelper('https://likezombiesgame/LoginSuccess.php');
         $FBloginUrl = $helper->getLoginUrl();
+        $debug->debug("FBloginUrl = ", $FBloginUrl);
     // Use the login url to redirect to Facebook for authentication
         header(FBloginUrl);
     //         echo "Facebook Login to LikeZombies Failed!";
-        }
+//        }
 // }    
 ?>
