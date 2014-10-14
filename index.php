@@ -1,4 +1,5 @@
 <?php 
+session_start();
 require_once( 'Facebook/FacebookSession.php' );
 require_once( 'Facebook/FacebookRedirectLoginHelper.php' );
 require_once( 'Facebook/FacebookRequest.php' );
@@ -67,10 +68,10 @@ $debug = new PHPDebug();
         $debug->debug("getLoginUrlparams = ", $getLoginUrlparams);
         //$FBloginUrl = $helper->getLoginUrl($getLoginUrlparams);
         echo '<a href="' . $helper->getLoginUrl($getLoginUrlparams) . '">Login with Facebook</a>';
-        $debug->debug("FBloginUrl = ", $FBloginUrl);
+        //$debug->debug("FBloginUrl = ", $FBloginUrl);
     // Use the login url to redirect to Facebook for authentication
-        header(FBloginUrl);
-    //         echo "Facebook Login to LikeZombies Failed!";
+        //header($FBloginUrl);
+    //    echo "Facebook Login to LikeZombies Failed!";
 //        }
 // }    
 ?>
