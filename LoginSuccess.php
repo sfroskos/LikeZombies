@@ -46,6 +46,7 @@ use Facebook\PHPDebug;
 
 FacebookSession::setDefaultApplication('1432542257021113','cc001cfeefbf0fa75256e0c93aaedd29');
 $helper = new FacebookCanvasLoginHelper();
+$debug = new PHPDebug();
 $debug->debug("Trying helper->getSession", null, INFO);
 try {
      $FBSession = $helper->getSession();
