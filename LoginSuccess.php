@@ -44,6 +44,7 @@ use Facebook\FacebookCanvasLoginHelper;
 use Facebook\PostToFB;
 use Facebook\PHPDebug;
 
+FacebookSession::setDefaultApplication('1432542257021113','cc001cfeefbf0fa75256e0c93aaedd29');
 $helper = new FacebookCanvasLoginHelper();
 $debug->debug("Trying helper->getSession", null, INFO);
 try {
