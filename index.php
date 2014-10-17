@@ -69,10 +69,10 @@ $debug = new PHPDebug();
         );
         $debug->debug("getLoginUrlparams = ", $getLoginUrlparams);
         $FBloginUrl = $helper->getLoginUrl($getLoginUrlparams);
-//        echo '<a href="' . $helper->getLoginUrl($getLoginUrlparams) . '">Login with Facebook</a>';
+        echo '<a href="' . $FBloginUrl . '">Login with Facebook</a>';
     // Use the login url to redirect to Facebook for authentication
         $debug->debug("Variable FBloginUrl =", $FBloginUrl);
-        header($FBloginUrl);
+        //header($FBloginUrl);
     //    echo "Facebook Login to LikeZombies Failed!";
 //        }
 // }    

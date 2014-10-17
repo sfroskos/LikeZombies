@@ -1,7 +1,7 @@
 <?php
 namespace Facebook;
 /**
- * PHPDebug is a customer class created to enable debugging of PHP code using 
+ * PHPDebug is a custom class created to enable debugging of PHP code using 
  * the JavaScript console. This way JavaScript and PHP can be run together and
  * debugged. This is particularly useful when debugging code to be executed on
  * Facebook Canvas
