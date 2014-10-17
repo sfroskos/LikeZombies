@@ -47,10 +47,10 @@ use Facebook\PHPDebug;
 FacebookSession::setDefaultApplication('1432542257021113','cc001cfeefbf0fa75256e0c93aaedd29');
 $helper = new FacebookCanvasLoginHelper();
 $debug = new PHPDebug();
-$debug->debug("Trying helper->getSession", null, INFO);
+$debug->debug("About to try helper->getSession", null, INFO);
 try {
     $FBSession = $helper->getSession();
-    $debug->debug("Trying helper->getSession", null, INFO);
+    $debug->debug("Variable FBSession =", $FBSession);
 } catch( FacebookRequestException $ex ) {
     $debug->debug("ex = ", $ex);
     // When Facebook returns an error
@@ -58,13 +58,13 @@ try {
     $debug->debug("ex = ", $ex);
      // When validation fails or other local issues
 }
-    $debug->debug("Variable FBSession =", $FBSession);
+//$debug->debug("Variable FBSession =", $FBSession);
 //Instantiate PostToFB class;
 $PostToFB = new PostToFB();
 //Get Facebook Session using JavaScriptLoginHelper
-$debug->debug("Variable FBSession =", $FBSession);
-$FBSession = $PostToFB->GetFBSession();
-$debug->debug("Variable FBSession =", $FBSession);
+//$debug->debug("Variable FBSession =", $FBSession);
+//$FBSession = $PostToFB->GetFBSession();
+//$debug->debug("Variable FBSession =", $FBSession);
 //Get user name from FB Profile
 $fbusername = $PostToFB->GetFBUserName($FBSession);
 $PostToFB->PostToFB($FBSession);  //call function to post to fb feed
