@@ -49,22 +49,22 @@ $helper = new FacebookCanvasLoginHelper();
 //$debug = new PHPDebug();
 //$debug->debug("Trying helper->getSession", null, INFO);
 try {
-     $FBSession = $helper->getSession();
-     //$debug->debug("Trying helper->getSession", null, INFO);
+    $FBSession = $helper->getSession();
+    $debug->debug("Trying helper->getSession", null, INFO);
 } catch( FacebookRequestException $ex ) {
-    //$debug->debug("ex = ", $ex);
+    $debug->debug("ex = ", $ex);
     // When Facebook returns an error
 } catch( Exception $ex ) {
-    //$debug->debug("ex = ", $ex);
+    $debug->debug("ex = ", $ex);
      // When validation fails or other local issues
 }
-    //$debug->debug("Variable FBSession =", $FBSession);
+    $debug->debug("Variable FBSession =", $FBSession);
 //Instantiate PostToFB class;
 $PostToFB = new PostToFB();
 //Get Facebook Session using JavaScriptLoginHelper
-//$debug->debug("Variable FBSession =", $FBSession);
+$debug->debug("Variable FBSession =", $FBSession);
 $FBSession = $PostToFB->GetFBSession();
-//$debug->debug("Variable FBSession =", $FBSession);
+$debug->debug("Variable FBSession =", $FBSession);
 //Get user name from FB Profile
 $fbusername = $PostToFB->GetFBUserName($FBSession);
 $PostToFB->PostToFB($FBSession);  //call function to post to fb feed
