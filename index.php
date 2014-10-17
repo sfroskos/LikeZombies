@@ -59,6 +59,7 @@ $debug = new PHPDebug();
 //    else {
     // Login failed. Redirect user to log in to LikeZombies
         $RedirectUrl = $_SERVER['HTTP_HOST'] . '/LoginSuccess.php';
+        $debug->debug("FBloginUrl = ", $FBloginUrl);
         $helper = new FacebookRedirectLoginHelper( $RedirectUrl,
             $appId = '1432542257021113', 
             $appSecret = 'cc001cfeefbf0fa75256e0c93aaedd29');
@@ -70,7 +71,7 @@ $debug = new PHPDebug();
         $debug->debug("getLoginUrlparams = ", $getLoginUrlparams);
         //$FBloginUrl = $helper->getLoginUrl($getLoginUrlparams);
         echo '<a href="' . $helper->getLoginUrl($getLoginUrlparams) . '">Login with Facebook</a>';
-        $debug->debug("FBloginUrl = ", $FBloginUrl);
+        //$debug->debug("FBloginUrl = ", $FBloginUrl);
     // Use the login url to redirect to Facebook for authentication
         //header($FBloginUrl);
     //    echo "Facebook Login to LikeZombies Failed!";
