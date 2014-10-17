@@ -30,19 +30,28 @@ use Facebook\FacebookCanvasLoginHelper;
 use Facebook\PostToFB;
 use Facebook\PHPDebug;
 
-FacebookSession::setDefaultApplication('1432542257021113','cc001cfeefbf0fa75256e0c93aaedd29');
-$helper = new FacebookCanvasLoginHelper();
+//Initialize Debug for Javascript console
 $debug = new PHPDebug();
-$debug->debug("About to try helper->getSession", null, INFO);
-try {
-    $session = $helper->getSession();
-    $debug->debug("Variable session =", $session);
-} catch( FacebookRequestException $ex ) {
-    $debug->debug("ex = ", $ex);
-    // When Facebook returns an error
-} catch( Exception $ex ) {
-    $debug->debug("ex = ", $ex);
-     // When validation fails or other local issues
+//check for active session
+if (!isset($_SESSION['facebookUserId']) || !isset($_SESSION['facebookSession']) || !isset($_SESSION['facebookUserProfile'])) {
+    //If no active session initialize app with app id (APPID) and secret (SECRET)
+    $debug->debug("Variable _SESSION:facebookUserID = ", $_SESSION['facebookUserId']);
+    $debug->debug("Variable _SESSION:facebookSession = ", $_SESSION['facebookSession']);
+    $debug->debug("Variable _SESSION:facebookUserProfile = ", $_SESSION['facebookUserProfile']);
+    $FacebookSession = new FacebookSession($_SESSION['facebookSession']);
+    FacebookSession::setDefaultApplication('1432542257021113','cc001cfeefbf0fa75256e0c93aaedd29');
+    $helper = new FacebookCanvasLoginHelper();
+    $debug->debug("About to try helper->getSession", null, INFO);
+    try {
+        $session = $helper->getSession();
+        $debug->debug("Variable session =", $session);
+    } catch( FacebookRequestException $ex ) {
+        $debug->debug("ex = ", $ex);
+        // When Facebook returns an error
+    } catch( Exception $ex ) {
+        $debug->debug("ex = ", $ex);
+        // When validation fails or other local issues
+    }
 }
 //$debug->debug("Variable FBSession =", $FBSession);
 //Instantiate PostToFB class;
