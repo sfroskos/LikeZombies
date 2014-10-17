@@ -35,8 +35,8 @@ $helper = new FacebookCanvasLoginHelper();
 $debug = new PHPDebug();
 $debug->debug("About to try helper->getSession", null, INFO);
 try {
-    $FBSession = $helper->getSession();
-    $debug->debug("Variable FBSession =", $FBSession);
+    $session = $helper->getSession();
+    $debug->debug("Variable session =", $session);
 } catch( FacebookRequestException $ex ) {
     $debug->debug("ex = ", $ex);
     // When Facebook returns an error
@@ -52,7 +52,7 @@ $PostToFB = new PostToFB();
 //$FBSession = $PostToFB->GetFBSession();
 //$debug->debug("Variable FBSession =", $FBSession);
 //Get user name from FB Profile
-$fbusername = $PostToFB->GetFBUserName($FBSession);
-$PostToFB->PostToFB($FBSession);  //call function to post to fb feed
+$fbusername = $PostToFB->GetFBUserName($session);
+$PostToFB->PostToFB($session);  //call function to post to fb feed
 echo 'Post Successful!';
 ?>
