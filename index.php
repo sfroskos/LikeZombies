@@ -35,7 +35,7 @@ use Facebook\PHPDebug;
 $debug = new PHPDebug();
 FacebookSession::setDefaultApplication('1432542257021113','cc001cfeefbf0fa75256e0c93aaedd29');// login helper
 //$RedirectUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/LoginSuccess.php';
-$RedirectUrl = 'http://likezombiesgame.com/LoginSuccess.php';
+$RedirectUrl = 'https://likezombiesgame.com/LoginSuccess.php';
 $helper = new FacebookRedirectLoginHelper( $RedirectUrl,
     $appId = '1432542257021113', 
     $appSecret = 'cc001cfeefbf0fa75256e0c93aaedd29');
@@ -49,7 +49,7 @@ $FBloginUrl = $helper->getLoginUrl($getLoginUrlparams);
 echo '<a href="' . $FBloginUrl . '">Login with Facebook</a>';
 // Use the login url to redirect to Facebook for authentication
 $debug->debug("Variable FBloginUrl =", $FBloginUrl);
-header($FBloginUrl);
+//header($FBloginUrl);
 $helper = new FacebookCanvasLoginHelper();
 try {
     $session = $helper->getSession();
@@ -68,7 +68,7 @@ try {
 } catch(\Exception $ex) {
    $facebookLoginHtml = "window.top.location = "
            . "'https://www.facebook.com/dialog/oauth?client_id="
-           . "{'1432542257021113'}&redirect_uri={http://likezombiesgame.com}"
+           . "{'1432542257021113'}&redirect_uri={https://likezombiesgame.com/LoginSuccess.php}"
            . "&scope=publish_actionspublic_profile, user_friends,"
            .  "user_relationships, read_stream, publish_actions';"; 
     $debug->debug("Variable facebookLoginHtml = ", $facebookLoginHtml);
