@@ -59,7 +59,7 @@ $debug = new PHPDebug();
 //    else {
     // Login failed. Redirect user to log in to LikeZombies
         //$RedirectUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/LoginSuccess.php';
-        $RedirectUrl = 'https://likezombiesgame.com/LoginSuccess.php';
+        $RedirectUrl = 'http://likezombiesgame.com/LoginSuccess.php';
         $helper = new FacebookRedirectLoginHelper( $RedirectUrl,
             $appId = '1432542257021113', 
             $appSecret = 'cc001cfeefbf0fa75256e0c93aaedd29');
