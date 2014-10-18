@@ -33,10 +33,23 @@ use Facebook\PHPDebug;
 
 //Initialize Debug for Javascript console
 $debug = new PHPDebug();
-// if (!isset($_SESSION['facebookUserId']) || !isset($_SESSION['facebookSession']) || !isset($_SESSION['facebookUserProfile'])) {
-    // init app with app id (APPID) and secret (SECRET)
-//    $FacebookSession = new FacebookSession($_SESSION['facebookSession']);
-FacebookSession::setDefaultApplication('1432542257021113','cc001cfeefbf0fa75256e0c93aaedd29');
+FacebookSession::setDefaultApplication('1432542257021113','cc001cfeefbf0fa75256e0c93aaedd29');// login helper
+//$RedirectUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/LoginSuccess.php';
+$RedirectUrl = 'http://likezombiesgame.com/LoginSuccess.php';
+$helper = new FacebookRedirectLoginHelper( $RedirectUrl,
+    $appId = '1432542257021113', 
+    $appSecret = 'cc001cfeefbf0fa75256e0c93aaedd29');
+$getLoginUrlparams = array(
+    'scope' => 'public_profile, user_friends, user_relationships, '
+    . 'read_stream, publish_actions',
+    'redirect_uri' => $RedirectUrl
+);
+$debug->debug("getLoginUrlparams = ", $getLoginUrlparams);
+$FBloginUrl = $helper->getLoginUrl($getLoginUrlparams);
+echo '<a href="' . $FBloginUrl . '">Login with Facebook</a>';
+// Use the login url to redirect to Facebook for authentication
+$debug->debug("Variable FBloginUrl =", $FBloginUrl);
+header($FBloginUrl);
 $helper = new FacebookCanvasLoginHelper();
 try {
     $session = $helper->getSession();
@@ -61,44 +74,4 @@ try {
     $debug->debug("Variable facebookLoginHtml = ", $facebookLoginHtml);
    if(isset($facebookLoginHtml)){ echo $facebookLoginHtml; };   
 }
-// login helper
-    //$helper = new FacebookRedirectLoginHelper( 'https://apps.facebook.com/likezombies.dev' );
-//    $helper = new FacebookCanvasLoginHelper();
-//    $debug->debug("Trying helper->getSession", null, INFO);
-//   try {
-//         $FBSession = $helper->getSession();
-//         $debug->debug("Trying helper->getSession", null, INFO);
-//    } catch( FacebookRequestException $ex ) {
-//        $debug->debug("ex = ", $ex);
-        // When Facebook returns an error
-//    } catch( Exception $ex ) {
-//        $debug->debug("ex = ", $ex);
-         // When validation fails or other local issues
-//    }
-//    $debug->debug("Variable FBSession =", $FBSession);
-//    if ($FBSession) {
-    // Already logged into LikeZombies
-//        echo "You are already logged into LikeZombies!";
-//    }
-//    else {
-    // Login failed. Redirect user to log in to LikeZombies
-        //$RedirectUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/LoginSuccess.php';
-//        $RedirectUrl = 'http://likezombiesgame.com/LoginSuccess.php';
-//        $helper = new FacebookRedirectLoginHelper( $RedirectUrl,
-//            $appId = '1432542257021113', 
-//            $appSecret = 'cc001cfeefbf0fa75256e0c93aaedd29');
-//        $getLoginUrlparams = array(
-//            'scope' => 'public_profile, user_friends, user_relationships, '
-//            . 'read_stream, publish_actions',
-//            'redirect_uri' => $RedirectUrl
-//        );
-//        $debug->debug("getLoginUrlparams = ", $getLoginUrlparams);
-//        $FBloginUrl = $helper->getLoginUrl($getLoginUrlparams);
-//        echo '<a href="' . $FBloginUrl . '">Login with Facebook</a>';
-    // Use the login url to redirect to Facebook for authentication
-//        $debug->debug("Variable FBloginUrl =", $FBloginUrl);
-        //header($FBloginUrl);
-    //    echo "Facebook Login to LikeZombies Failed!";
-//        }
-// }    
 ?>
