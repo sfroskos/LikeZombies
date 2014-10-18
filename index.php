@@ -40,6 +40,7 @@ FacebookSession::setDefaultApplication('1432542257021113','cc001cfeefbf0fa75256e
 $helper = new FacebookCanvasLoginHelper();
 try {
     $session = $helper->getSession();
+    $debug->debug("Variable session =", $session);
     if($session){
         try {
         $facebook_profile = (new FacebookRequest(
@@ -57,6 +58,7 @@ try {
            . "{'1432542257021113'}&redirect_uri={http://likezombiesgame.com}"
            . "&scope=publish_actionspublic_profile, user_friends,"
            .  "user_relationships, read_stream, publish_actions';"; 
+    $debug->debug("Variable facebookLoginHtml = ", $facebookLoginHtml);
    if(isset($facebookLoginHtml)){ echo $facebookLoginHtml; };   
 }
 // login helper
