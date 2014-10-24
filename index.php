@@ -60,7 +60,11 @@ else {
            . "&scope=publish_actionspublic_profile, user_friends,"
            .  "user_relationships, read_stream, publish_actions';"; 
     $debug->debug("Variable facebookLoginHtml = ", $facebookLoginHtml);
-    if(isset($facebookLoginHtml)){ echo $facebookLoginHtml; };   
+    if(isset($facebookLoginHtml)){ 
+        echo '<script language="javascript">'; 
+        echo 'top.location.href = $facebookLoginHtml;'; 
+        echo '</script>';        
+    }
 }
 
 function parse_signed_request($signed_request) {
