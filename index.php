@@ -62,7 +62,7 @@ else {
     $debug->debug("Variable facebookLoginHtml = ", $facebookLoginHtml);
     if(isset($facebookLoginHtml)){ 
         echo '<script language="javascript">'; 
-        echo 'top.location.href = $facebookLoginHtml;'; 
+        echo 'top.location.href =' . $facebookLoginHtml . ';'; 
         echo '</script>';        
     }
 }
