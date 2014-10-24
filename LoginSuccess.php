@@ -36,31 +36,22 @@ $debug = new PHPDebug();
 //Set Derault Application
 FacebookSession::setDefaultApplication('1432542257021113','cc001cfeefbf0fa75256e0c93aaedd29');
 //check for active session
-$helper = new FacebookCanvasLoginHelper();
-try {
-    $session = $helper->getSession();
-    $debug->debug("Variable session =", $session);
-    if($session){
-        try {
-        $facebook_profile = (new FacebookRequest(
-            $session, 'GET', '/me'
-        ))->execute()->getGraphObject(GraphUser::className());
-        echo $facebook_profile->getName;
-    } catch(FacebookRequestException $e) {
-    }
-}
-} catch(FacebookRequestException $ex) {
-   echo $ex;   
-} catch(\Exception $ex) {
-   $facebookLoginHtml = "window.top.location = "
-           . "'https://www.facebook.com/dialog/oauth?client_id="
-           . "{'1432542257021113'}&redirect_uri={https://likezombiesgame.com/LoginSuccess.php}"
-           . "&scope=publish_actionspublic_profile, user_friends,"
-           .  "user_relationships, read_stream, publish_actions';"; 
-    $debug->debug("Variable facebookLoginHtml = ", $facebookLoginHtml);
-   if(isset($facebookLoginHtml)){ echo $facebookLoginHtml; };   
-}
-
+//$helper = new FacebookCanvasLoginHelper();
+//try {
+//    $session = $helper->getSession();
+//    $debug->debug("Variable session =", $session);
+//    if($session){
+//        try {
+//        $facebook_profile = (new FacebookRequest(
+//            $session, 'GET', '/me'
+//        ))->execute()->getGraphObject(GraphUser::className());
+//        echo $facebook_profile->getName;
+//    } catch(FacebookRequestException $e) {
+//    }
+//}
+//} catch(FacebookRequestException $ex) {
+//   echo $ex;   
+//} catch(\Exception $ex) {
 //if (!isset($_SESSION['facebookUserId']) || !isset($_SESSION['facebookSession']) || !isset($_SESSION['facebookUserProfile'])) {
     //If no active session initialize app with app id (APPID) and secret (SECRET)
 //    $debug->debug("Variable _SESSION:facebookUserID = ", $_SESSION['facebookUserId']);

@@ -35,17 +35,68 @@ use Facebook\PHPDebug;
 $debug = new PHPDebug();
 FacebookSession::setDefaultApplication('1432542257021113','cc001cfeefbf0fa75256e0c93aaedd29');// login helper
 //$RedirectUrl = 'https://' . $_SERVER['HTTP_HOST'] . '/LoginSuccess.php';
-$RedirectUrl = 'https://likezombiesgame.com/LoginSuccess.php';
-$helper = new FacebookRedirectLoginHelper( $RedirectUrl,
-    $appId = '1432542257021113', 
-    $appSecret = 'cc001cfeefbf0fa75256e0c93aaedd29');
-$getLoginUrlparams = array(
-    'scope' => 'public_profile,user_friends,user_relationships,read_stream,publish_actions',
-    'redirect_uri' => $RedirectUrl);
-$debug->debug("getLoginUrlparams = ", $getLoginUrlparams);
-$FBloginUrl = $helper->getLoginUrl($getLoginUrlparams);
-echo '<a href="' . $FBloginUrl . '">Login with Facebook</a>';
+//$RedirectUrl = 'https://likezombiesgame.com/LoginSuccess.php';
+  /**
+   * Returns the JSON encoded POST data, if any, as an object.
+   * @return Object|null
+   */
+// get the raw POST data
+$rawData = file_get_contents("php://input");
+// this returns null if not valid json
+//return json_decode($rawData);
+$JSONSignedRequest = parse_signed_request($rawData);
+$SignedRequestArray = json_decode($JSONSignedRequest);
+if($SignedRequestArray["oauth_token"]) { 
+    $debug->debug("oauth_token detected. The user is signed in.", null, INFO);
+    echo 'You are already signed into LikeZombies!';
+}
+else {
+    $debug->debug("No oauth_token detected. The user is not signed in.", null, INFO);
+//    $RedirectUrl = 'https://apps.facebook.com/likezombiesdev/index.php';
+    $facebookLoginHtml = "window.top.location = "
+           . "'https://www.facebook.com/dialog/oauth?client_id="
+           . "{'1432542257021113'}&redirect_uri= "
+           . "{https://apps.facebook.com/likezombiesdev/index.php}"
+           . "&scope=publish_actionspublic_profile, user_friends,"
+           .  "user_relationships, read_stream, publish_actions';"; 
+    $debug->debug("Variable facebookLoginHtml = ", $facebookLoginHtml);
+    if(isset($facebookLoginHtml)){ echo $facebookLoginHtml; };   
+}
+
+function parse_signed_request($signed_request) {
+  list($encoded_sig, $payload) = explode('.', $signed_request, 2); 
+
+  $secret = "cc001cfeefbf0fa75256e0c93aaedd29"; // Use your app secret here
+
+  // decode the data
+  $sig = base64_url_decode($encoded_sig);
+  $data = json_decode(base64_url_decode($payload), true);
+
+  // confirm the signature
+  $expected_sig = hash_hmac('sha256', $payload, $secret, $raw = true);
+  if ($sig !== $expected_sig) {
+    error_log('Bad Signed JSON signature!');
+    $debug->debug("Bad Signed JSON signature!", null, INFO);
+    return null;
+  }
+
+  return $data;
+}
+
+function base64_url_decode($input) {
+  return base64_decode(strtr($input, '-_', '+/'));
+}
+
+//$helper = new FacebookRedirectLoginHelper( $RedirectUrl,
+//    $appId = '1432542257021113', 
+//    $appSecret = 'cc001cfeefbf0fa75256e0c93aaedd29');
+//$getLoginUrlparams = array(
+//    'scope' => 'public_profile,user_friends,user_relationships,read_stream,publish_actions',
+//    'redirect_uri' => $RedirectUrl);
+//$debug->debug("getLoginUrlparams = ", $getLoginUrlparams);
+//$FBloginUrl = $helper->getLoginUrl($getLoginUrlparams);
+//$debug->debug("Variable FBloginUrl =", $FBloginUrl);
+//echo '<a href="' . $FBloginUrl . '">Login with Facebook</a>';
 // Use the login url to redirect to Facebook for authentication
-$debug->debug("Variable FBloginUrl =", $FBloginUrl);
 //header($FBloginUrl);
 ?>
