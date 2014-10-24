@@ -55,10 +55,10 @@ else {
 //    $RedirectUrl = 'https://apps.facebook.com/likezombiesdev/index.php';
     $facebookLoginHtml = "window.top.location = "
            . "'https://www.facebook.com/dialog/oauth?client_id="
-           . "{'1432542257021113'}&redirect_uri= "
+           . "{'1432542257021113'}&redirect_uri="
            . "{https://apps.facebook.com/likezombiesdev/index.php}"
-           . "&scope=publish_actions, public_profile, user_friends,"
-           .  "user_relationships, read_stream, publish_actions';"; 
+           . "&scope=publish_actions,public_profile,user_friends,"
+           .  "user_relationships,read_stream,publish_actions';"; 
     $debug->debug("Variable facebookLoginHtml = ", $facebookLoginHtml);
     if(isset($facebookLoginHtml)){ 
         echo '<script language="javascript">'; 
