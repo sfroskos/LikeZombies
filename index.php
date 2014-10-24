@@ -57,7 +57,7 @@ else {
            . "'https://www.facebook.com/dialog/oauth?client_id="
            . "{'1432542257021113'}&redirect_uri= "
            . "{https://apps.facebook.com/likezombiesdev/index.php}"
-           . "&scope=publish_actionspublic_profile, user_friends,"
+           . "&scope=publish_actions, public_profile, user_friends,"
            .  "user_relationships, read_stream, publish_actions';"; 
     $debug->debug("Variable facebookLoginHtml = ", $facebookLoginHtml);
     if(isset($facebookLoginHtml)){ 
