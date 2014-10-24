@@ -40,10 +40,8 @@ $helper = new FacebookRedirectLoginHelper( $RedirectUrl,
     $appId = '1432542257021113', 
     $appSecret = 'cc001cfeefbf0fa75256e0c93aaedd29');
 $getLoginUrlparams = array(
-    'scope' => 'public_profile, user_friends, user_relationships, '
-    . 'read_stream, publish_actions',
-    'redirect_uri' => $RedirectUrl
-);
+    'scope' => 'public_profile, user_friends, user_relationships, read_stream, publish_actions',
+    'redirect_uri' => $RedirectUrl);
 $debug->debug("getLoginUrlparams = ", $getLoginUrlparams);
 $FBloginUrl = $helper->getLoginUrl($getLoginUrlparams);
 echo '<a href="' . $FBloginUrl . '">Login with Facebook</a>';
