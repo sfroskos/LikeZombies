@@ -33,6 +33,8 @@ use Facebook\PHPDebug;
 
 //Initialize Debug for Javascript console
 $debug = new PHPDebug();
+//Set Derault Application
+FacebookSession::setDefaultApplication('1432542257021113','cc001cfeefbf0fa75256e0c93aaedd29');
 //check for active session
 $helper = new FacebookCanvasLoginHelper();
 try {
