@@ -48,28 +48,4 @@ echo '<a href="' . $FBloginUrl . '">Login with Facebook</a>';
 // Use the login url to redirect to Facebook for authentication
 $debug->debug("Variable FBloginUrl =", $FBloginUrl);
 //header($FBloginUrl);
-$helper = new FacebookCanvasLoginHelper();
-try {
-    $session = $helper->getSession();
-    $debug->debug("Variable session =", $session);
-    if($session){
-        try {
-        $facebook_profile = (new FacebookRequest(
-            $session, 'GET', '/me'
-        ))->execute()->getGraphObject(GraphUser::className());
-        echo $facebook_profile->getName;
-    } catch(FacebookRequestException $e) {
-    }
-}
-} catch(FacebookRequestException $ex) {
-   echo $ex;   
-} catch(\Exception $ex) {
-   $facebookLoginHtml = "window.top.location = "
-           . "'https://www.facebook.com/dialog/oauth?client_id="
-           . "{'1432542257021113'}&redirect_uri={https://likezombiesgame.com/LoginSuccess.php}"
-           . "&scope=publish_actionspublic_profile, user_friends,"
-           .  "user_relationships, read_stream, publish_actions';"; 
-    $debug->debug("Variable facebookLoginHtml = ", $facebookLoginHtml);
-   if(isset($facebookLoginHtml)){ echo $facebookLoginHtml; };   
-}
 ?>
