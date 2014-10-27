@@ -53,11 +53,11 @@ if($SignedRequestArray["oauth_token"]) {
 else {
     $debug->debug("No oauth_token detected. The user is not signed in.", null, INFO);
 //    $RedirectUrl = 'https://apps.facebook.com/likezombiesdev/index.php';
-    $facebookLoginHtml = "https://www.facebook.com/dialog/oauth?client_id={'1432542257021113'}&redirect_uri={https://apps.facebook.com/likezombiesdev}&scope=publish_actions,public_profile,user_friends,user_relationships,read_stream,publish_actions"; 
+    $facebookLoginHtml = "https://www.facebook.com/dialog/oauth?client_id={'1432542257021113'}&redirect_uri={https://apps.facebook.com/likezombiesdev/}&scope=publish_actions,public_profile,user_friends,user_relationships,read_stream,publish_actions"; 
     $debug->debug("Variable facebookLoginHtml = ", $facebookLoginHtml);
     if(isset($facebookLoginHtml)){ 
         echo '<script language="javascript">'; 
-        echo "top.location.href='https://www.facebook.com/dialog/oauth?client_id={1432542257021113}&redirect_uri={https://apps.facebook.com/likezombiesdev}&scope=publish_actions,public_profile,user_friends,user_relationships,read_stream,publish_actions';"; 
+        echo "top.location.href='https://www.facebook.com/dialog/oauth?client_id={1432542257021113}&redirect_uri={https://apps.facebook.com/likezombiesdev/}&scope=publish_actions,public_profile,user_friends,user_relationships,read_stream,publish_actions';"; 
         echo '</script>';        
     }
 }
